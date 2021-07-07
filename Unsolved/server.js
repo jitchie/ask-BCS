@@ -62,11 +62,12 @@ db.note.find({},(err,data) => {
 // GET: /find/:id
 // ==================================================================
 app.get('find/:id',(req,res)=>{
-  db.notes.findOne(
+  db.note.findOne(
     {
       _id: mongojs.ObjectId(req.params.id)
     },
-    (err,data)=>{
+    (err,data) => {
+      console.log('/find/:id', err,data);
       if (err) {
         res.send(err);
         } else {
@@ -81,11 +82,12 @@ app.get('find/:id',(req,res)=>{
 // POST: /update/:id
 // ================================================================
 app.post('/update/:id',(req,res)=>{
-  db.notes.update(
+  db.note.update(
     {
       _id: mongojs.ObjectId(req.params.id)
     },
     (err,data) => {
+      console.log('/update/:id', err,data);
       if (err) {
         res.send(err);
         } else {
@@ -99,11 +101,12 @@ app.post('/update/:id',(req,res)=>{
 // DELETE: /delete/:id
 // ==================================================================
 app.delete('/delete/:id', (req,res) => {
-  db.notes.deleteOne(
+  db.note.deleteOne(
     {
       _id: mongojs.ObjectId(req.params.id)
     },
     (err,data) => {
+      console.log('/delete/:id', err, data);
       if (err) {
         res.send(err);
         } else {
@@ -118,6 +121,7 @@ app.delete('/delete/:id', (req,res) => {
 // ===================================
 app.delete('clearall', (req,res) => {
   db.note.remove({},(err,data) => {
+    console.log('clearall', err,data);
     if (err) {
       res.send(err);
       } else {
